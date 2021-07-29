@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div style="text-align: center;">
+
+    <div>
+        <h4>Login</h4>
+    </div>
+
+    <div>
+      <form action="" method="post">
+        {% csrf_token %} <!-- POST method 에 반드시 이것부터 쓸 것  -->
+        {{ form }} <!-- LoginView 에서 기본 제공 -->
+        <input type="submit" class="btn btn-primary">
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
+

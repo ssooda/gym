@@ -43,8 +43,10 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
 # Class Based View
 
 
+
 class AccountCreateView(CreateView):
     model = User  # 장고에서 기본적으로 제공하는 model
     form_class = UserCreationForm
     success_url = reverse_lazy('accountapp:hello_world')  # 함수형에서는 reverse, 클래스형에서는 reverse_lazy
-    template_name = 'accountapp/create.html'
+    template_name = 'accountapp/create.html'  # 어떤 html 로 연결할지 template 지정 => 함수형에서 return render 와 같은 역할
+
