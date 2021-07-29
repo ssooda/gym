@@ -7,7 +7,22 @@
 {% block content %}
 
     <div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">
+        <h1>
+            testing
+        </h1>
+        <form action="/account/hello_world/" method="post">
+            <!-- POST method를 사용해서 요청을 보낼 떄는 csrf token 을 명시해야함-->
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="POST">
+        <h1>
+            <!-- view.py 에서 context 에서 text 라는 이름을 가진 데이터를 불러와라 -->
+            {{ text }}
 
+        </h1>
+        </form>
     </div>
+
+    <!--    method POST를 사용하기 위해서는 html 안에 form 을 만들어 줘야함 : request body 에 들어가는 정보-->
+
 
 {% endblock %}
