@@ -1,4 +1,8 @@
 <!-- head 부분을 이 폴더에 따로 떼어놓고, 각 파일에는 include 를 통해 부분, 조각으로 반영됩니다-->
+
+<!-- static 관련 파일을 사용하려면 load static 구문을 넣어줘야함-->
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <title>WhichIsland</title>
@@ -10,4 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Palette+Mosaic&display=swap" rel="stylesheet">
+
+    <!--  DEFAULT CSS LINK  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}"
 </head>
