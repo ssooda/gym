@@ -6,9 +6,13 @@
 <body>
     {% include 'header.html' %}
 
+    <hr>
+
     <!-- extends 를 사용하기 위해서 block 구문을 만들어야 함 => content 부분만 accountapp 내부에서 마음대로 설정할 수 있음-->
     {% block content %}
     {% endblock %}
+
+    <hr>
 
     {% include 'footer.html' %}
 
