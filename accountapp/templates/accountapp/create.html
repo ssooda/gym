@@ -1,0 +1,15 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+    <div style="text-align: center;">
+<!--   파이썬 파일에서는 reverse(accountapp:hello_world)    -->
+        <form action="{% url 'accountapp:create' " method="post"> <!-- accountapp 내부에 있는 create 라우트로 연결해라 -->
+        {% csrf_token %}
+        {{ form }}
+        <!-- accountapp 에서 views.py에 AccountCreateView 클래스가 urls.py 에서 create 로 라우트 됨
+        AccountCreateView 클래스에서 form_class 를 미리 지정해줬는데, 이를 html 파일에서 form 으로 불러올 수 있음-->
+
+            <input type="submit" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

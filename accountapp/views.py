@@ -1,10 +1,15 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
 
 from accountapp.models import HelloWorld
+
+# Function Based View
 
 
 def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
@@ -33,3 +38,13 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
         hello_world_list = HelloWorld.objects.all()  # HelloWorld 클래스와 연결되어 있는 db의 모든 내용을 긁어옴
         return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
 
+
+
+# Class Based View
+
+
+class AccountCreateView(CreateView):
+    model = User  # 장고에서 기본적으로 제공하는 model
+    form_class = UserCreationForm
+    success_url = reverse_lazy('accountapp:hello_world')  # 함수형에서는 reverse, 클래스형에서는 reverse_lazy
+    template_name = 'accountapp/create.html'
