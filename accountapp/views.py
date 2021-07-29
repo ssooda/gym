@@ -5,8 +5,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView, UpdateView
 
+from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
 
 # Function Based View
@@ -44,9 +45,21 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
 
 
 
-class AccountCreateView(CreateView):
+class AccountCreateView(CreateView):  # 회원가입
     model = User  # 장고에서 기본적으로 제공하는 model
     form_class = UserCreationForm
     success_url = reverse_lazy('accountapp:hello_world')  # 함수형에서는 reverse, 클래스형에서는 reverse_lazy
     template_name = 'accountapp/create.html'  # 어떤 html 로 연결할지 template 지정 => 함수형에서 return render 와 같은 역할
 
+
+class AccountDetailView(DetailView):  # 개인 페이지
+    model = User
+    context_object_name = 'target_user'
+    template_name = 'accountapp/detail.html'
+
+
+class AccountUpdateView(UpdateView):
+    model = User
+    form_class = AccountUpdateForm
+    success_url = reverse_lazy('accountapp:hello_world')
+    template_name = 'accountapp/update.html'

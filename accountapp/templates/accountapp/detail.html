@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{%  block content %}
+<div>
+  <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+    <p>
+    <!--target_user 은 현재 자기가 보고 있는 페이지의 user 를 의미함-->
+      {{ target_user.date_joined }}
+    </p>
+    <h2 style="font-family: 'NanumBarunGothicBold'">
+      {{ target_user.username }}
+    </h2>
+
+    {% if target_user == user %}
+    <!--    현재 페이지의 user(target_user)가 현재 로그인 되어있는 유저(user)와 같다면-->
+    <a href="{% url 'accountapp:update' pk=user.pk %}">
+      <p>
+        Change Info
+      </p>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
