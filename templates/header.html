@@ -6,9 +6,9 @@
             <h1 class="whichisland_logo"> Which Island </h1>
         </div>
         <div>
-            <span>nav1</span>
-            <span>nav2</span>
-            <span>nav3</span>
+            <span>nav1</span> |
+            <span>nav2</span> |
+            <span>nav3</span> |
 
             {% if not user.is_authenticated %} <!--유저가 로그인 되어있지 않다면-->
             <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
@@ -17,12 +17,16 @@
                 <!--request.path : 요청 시 있었던 페이지(원래 있던 자리) -->
                 <!--login url로 바로 들어가면 원래 있던 자리가 없으므로 next=부분이 의미 없어짐 =>LOGIN_REDIRECT_URL 을 설정해야함 -> ROOT 폴더의 settings.py 에서 설정할 것-->
                 <span>login</span>
-            </a>
+            </a> |
             {% else %}
             <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">
-                <span>logout</span>
+                <span>logout</span> |
             </a>
             {% endif %}
+
+            <a href="{% url 'accountapp:create' %}">
+                <span>SignUp</span>
+            </a>
 
 
         </div>

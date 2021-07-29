@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 
 {% block content %}
 
-  <div style="text-align: center;">
+  <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
 
     <div>
         <h4>Login</h4>
@@ -11,8 +12,9 @@
     <div>
       <form action="" method="post">
         {% csrf_token %} <!-- POST method 에 반드시 이것부터 쓸 것  -->
-        {{ form }} <!-- LoginView 에서 기본 제공 -->
-        <input type="submit" class="btn btn-primary">
+<!--        {{ form }} &lt;!&ndash; LoginView 에서 기본 제공 &ndash;&gt;-->
+        {% bootstrap_form form %} <!-- bootstrap 이 적용된 form 을 사용 -->
+        <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3 ">
       </form>
 
     </div>
