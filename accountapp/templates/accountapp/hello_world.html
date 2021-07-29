@@ -6,20 +6,28 @@
 <!-- base.html에서 block content 부분은 이 안에 입력하는 내용이 렌더링 됨 !-->
 {% block content %}
 
-    <div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">
-        <h1>
-            testing
+    <div style="border-radius: 1rem; margin: 2rem; text-align: center;">
+        <h1 style="font-family: 'Roboto Mono', monospace;">
+            Hello World LIST!
         </h1>
+
         <form action="/account/hello_world/" method="post">
             <!-- POST method를 사용해서 요청을 보낼 떄는 csrf token 을 명시해야함-->
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary" value="POST">
-        <h1>
-            <!-- view.py 에서 context 에서 text 라는 이름을 가진 데이터를 불러와라 -->
-            {{ text }}
-
-        </h1>
+            <div>
+                <input type="text" name="hello_world_input">
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary" value="POST">
+            </div>
         </form>
+
+        {% if hello_world_output %}
+        <h1>
+            {{ hello_world_out.text }}
+        </h1>
+        {% endif %}
+
     </div>
 
     <!--    method POST를 사용하기 위해서는 html 안에 form 을 만들어 줘야함 : request body 에 들어가는 정보-->
