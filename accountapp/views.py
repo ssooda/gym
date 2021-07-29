@@ -1,7 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
+
 from accountapp.models import HelloWorld
 
 
@@ -13,15 +15,21 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
 
         temp = request.POST.get('hello_world_input')  # html 에서 name 이 hello_world_input
 
-        new_hello_world = HelloWorld  # 데이터베이스를 연결한 HelloWorld 라는 클래스의 새로운 객체(new_hello_world)를 만듦
+        new_hello_world = HelloWorld()  # 데이터베이스를 연결한 HelloWorld 라는 클래스의 새로운 객체(new_hello_world)를 만듦
         new_hello_world.text = temp
         new_hello_world.save()  # db에 데이터를 저장
 
-        return render(request, 'accountapp/hello_world.html', context={'hello_world_output': new_hello_world})
-    # render : 파이썬 폴더에서 직접 view 단을 만드는 것이 아니라 요청이 있을 때 보여줄 html 파일을 연결하는 것
-    # render 로 html 파일을 연결해주려면 ROOT 폴더의 settings.py 에서 TEMPLATES 'DIRS': [os.path.join(BASE_DIR, 'templates')] 을 명시해줘야함
-    # context : 데이터 꾸러미 {'text': 'POST method'} text 라는 이름을 가지고 있고 내용은 POST method! => html에서 {{ text }}로 사용할 수 있음
+        # return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
+        # render : 파이썬 폴더에서 직접 view 단을 만드는 것이 아니라 요청이 있을 때 보여줄 html 파일을 연결하는 것 context : 데이터 꾸러미 {'text': 'POST
+        # method'} text 라는 이름을 가지고 있고 내용은 POST method! => html에서 {{ text }}로 사용할 수 있음 render 로 html 파일을 연결해주려면 ROOT
+        # 폴더의 settings.py 에서 TEMPLATES 'DIRS': [os.path.join(BASE_DIR, 'templates')] 을 명시해줘야함
+
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        # reverse : accountapp의 urls.py 에서 만들어 두었던 accountapp 과 hello_world 만으로도 해당 html로 갈 수 있도록
+        # HttpResponseRedirect : 재연결 => method가 post인 현재페이지에서 새로고침을 하더라도 method가 post인 페이지로 연결되는 것이 아니라
+        # get 인 페이지로 연결 될 수 있도록 함
 
     else:
-        return render(request, 'accountapp/hello_world.html', context={'text': 'GET method!!'})
+        hello_world_list = HelloWorld.objects.all()  # HelloWorld 클래스와 연결되어 있는 db의 모든 내용을 긁어옴
+        return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
 
