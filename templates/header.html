@@ -18,19 +18,19 @@
                 <!--login url로 바로 들어가면 원래 있던 자리가 없으므로 next=부분이 의미 없어짐 =>LOGIN_REDIRECT_URL 을 설정해야함 -> ROOT 폴더의 settings.py 에서 설정할 것-->
                 <span>login</span>
             </a> |
+            <a href="{% url 'accountapp:create' %}" style="text-decoration:none">
+                <span>SignUp</span>
+            </a>
+
             {% else %}
             <a href="{% url 'accountapp:detail' pk=user.pk%}" >  <!-- detail 뒤에 받는 정수형 pk는 현재 로그인 되어있는 user 의 pk임 -->
                 <span>MyPage</span> |
             </a>
             <a href="{% url 'accountapp:logout' %}?next={{ request.path }}" >
-                <span>LogOut</span> |
+                <span>LogOut</span>
             </a>
 
             {% endif %}
-
-            <a href="{% url 'accountapp:create' %}" style="text-decoration:none">
-                <span>SignUp</span>
-            </a>
 
 
         </div>
