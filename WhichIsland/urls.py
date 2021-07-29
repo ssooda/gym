@@ -1,3 +1,4 @@
+# ROOT폴더의 urls.py에서 라우팅 : 라우팅 하는 파일
 """WhichIsland URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
