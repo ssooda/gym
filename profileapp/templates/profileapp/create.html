@@ -1,0 +1,19 @@
+{%  extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+        <div class="mb-4">
+            <h4>Profile Create</h4>
+        </div>
+
+        <form action="{% url 'profileapp:create' %} " method="post" enctype="multipart/form-data"> <!-- profileapp 내부에 있는 create 라우트로 연결해라 (url) -->
+        <!--이미지를 받을면 enctype=multipart/form-data로 지정해줘야함-->
+            {% csrf_token %}
+            {% bootstrap_form form %} <!-- bootstrap 이 적용된 form 을 사용 -->
+            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3 ">
+        </form>
+    </div>
+
+{% endblock %}
