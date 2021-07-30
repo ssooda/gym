@@ -30,7 +30,7 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
         temp = request.POST.get('hello_world_input')  # html 에서 name 이 hello_world_input
 
         new_hello_world = HelloWorld()  # 데이터베이스를 연결한 HelloWorld 라는 클래스의 새로운 객체(new_hello_world)를 만듦
-        new_hello_world.text = temp
+        new_hello_world.text = temp  # 해당 객체의 text 라는 필드에 temp를 대입
         new_hello_world.save()  # db에 데이터를 저장
 
         # return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})

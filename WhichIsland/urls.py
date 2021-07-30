@@ -14,6 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
@@ -21,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),  # accountapp 폴더의 urls 라는 파일에서 다시 분기해나감
     path('profiles/', include('profileapp.urls'))   # profileapp 폴더의 urls 라는 파일에서 다시 분기해나감
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 프로필 사진 화면에 띄우기
