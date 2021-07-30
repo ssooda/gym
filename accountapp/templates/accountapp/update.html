@@ -8,7 +8,7 @@
             <h4>Change Info</h4>
         </div>
 <!--   파이썬 파일에서는 reverse(accountapp:hello_world)    -->
-        <form action="{% url 'accountapp:update' pk=user.pk %} " method="post"> <!-- accountapp 내부에 있는 create 라우트로 연결해라 -->
+        <form action="{% url 'accountapp:update' pk=target_user.pk %} " method="post"> <!-- accountapp 내부에 있는 create 라우트로 연결해라 -->
         <!--accountapp 폴더의 urls.py 에서 확인해보면 update 라는 라우트는 views.py의 AccountUpdateView 클래스로 연결됨 => 이때 정수형으로 pk를 받는데, 여기에 user.pk가 들어감-->
         {% csrf_token %}
 <!--        {{ form }}-->

@@ -60,6 +60,7 @@ class AccountDetailView(DetailView):  # 개인 페이지
 
 class AccountUpdateView(UpdateView):  # 회원정보 수정
     model = User
+    context_object_name = 'target_user'
     form_class = AccountUpdateForm
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
@@ -67,5 +68,6 @@ class AccountUpdateView(UpdateView):  # 회원정보 수정
 
 class AccountDeleteView(DeleteView):  # 회원탈퇴
     model = User
+    context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:login')
     template_name = 'accountapp/delete.html'

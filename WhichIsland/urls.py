@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('account/', include('accountapp.urls')),  # accountapp폴더의 urls라는 파일에서 다시 분기해나감
+    path('accounts/', include('accountapp.urls')),  # accountapp 폴더의 urls 라는 파일에서 다시 분기해나감
 ]

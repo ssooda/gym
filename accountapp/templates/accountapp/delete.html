@@ -7,7 +7,7 @@
             <h4>Quit</h4>
         </div>
 <!--   파이썬 파일에서는 reverse(accountapp:hello_world)    -->
-        <form action="{% url 'accountapp:delete' pk=user.pk %} " method="post"> <!-- accountapp 내부에 있는 create 라우트로 연결해라 -->
+        <form action="{% url 'accountapp:delete' pk=target_user.pk %} " method="post"> <!-- accountapp 내부에 있는 create 라우트로 연결해라 -->
         {% csrf_token %}
 
             <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3 ">
