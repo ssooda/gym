@@ -153,3 +153,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
 LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
 
+
+# http://127.0.0.1:8000/media/---
+MEDIA_URL = '/media/'
+
+# 파일을 올리면 media라는 디렉토리가 새로 생기면서 media 아래에 우리가 올린 파일이 저장된다
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
