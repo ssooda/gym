@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,14 +6,21 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
+
+# method_decorator 은 배열 내에 있는 모든 데코레이터를 확인
+has_ownership = [account_ownership_required, login_required]
+
 
 # Function Based View
 
 
+@login_required  # 데코레이터: 로그인이 안 된 경우 로그인 창으로 돌아가도록
 def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
     # return HttpResponse("hello world")
     # HttpResponse 는 직접 view 단을 만드는 것임
@@ -52,12 +60,15 @@ class AccountCreateView(CreateView):  # 회원가입
     template_name = 'accountapp/create.html'  # 어떤 html 로 연결할지 template 지정 => 함수형에서 return render 와 같은 역할
 
 
+
 class AccountDetailView(DetailView):  # 개인 페이지
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
 
 
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):  # 회원정보 수정
     model = User
     context_object_name = 'target_user'
@@ -66,6 +77,8 @@ class AccountUpdateView(UpdateView):  # 회원정보 수정
     template_name = 'accountapp/update.html'
 
 
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):  # 회원탈퇴
     model = User
     context_object_name = 'target_user'
