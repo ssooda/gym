@@ -20,74 +20,31 @@
 
 </style>
 
+  {% if article_list %}
     <div class="container">
-      <div class="item1">
-        <img src="https://picsum.photos/200/300">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/100">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/240">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/150">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/300">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/350">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/200">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/150">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/100">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/200">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/230">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/230">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/310">
-      </div>
-
-      <div class="item1">
-        <img src="https://picsum.photos/200/210">
-      </div>
-
+      {% for article in article_list %}
+      <a href="{% url 'articleapp:detail' pk=article.pk %}">
+      {% include 'snippets/card.html' with article=article %}
+      <!-- card.html 에 있는 article (전자)에 list.html 에 있는 article (후자)을 대입-->
+      </a>
+      {% endfor %}
     </div>
+  <script src="{% static 'js/magicgrid.js' %}"></script>
 
-    <div style="text-align: right;">
+  {% else %}
+    <div class="text-center">
+      <h1>You Can Start WhichIsland !</h1>
+    </div>
+  {% endif %}
+
+  {% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+    <div class="text-center">
       <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-3 mt-3 mb-3">
         Create Article
       </a>
     </div>
 
-<script src="{% static 'js/magicgrid.js' %}">
-
-</script>
 
 
 {% endblock %}
