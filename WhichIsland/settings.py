@@ -45,7 +45,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-# 앱을 생성하고, 라이브러리 추가할 때 마다 여기에 적어야 함
+# 앱을 생성하고(python manage.py startapp ), 라이브러리 추가할 때 마다 여기에 적어야 함
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'accountapp',
     'profileapp',
     'articleapp',
+    'commentapp',
 ]
 
 MIDDLEWARE = [

@@ -6,10 +6,12 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
+from django.views.generic.edit import FormMixin
 
 from articleapp.decorators import article_ownership_required
 from articleapp.forms import ArticleCreationForm
 from articleapp.models import Article
+from commentapp.forms import CommentCreationForm
 
 
 @method_decorator(login_required, 'get')
@@ -30,10 +32,18 @@ class ArticleCreateView(CreateView):
         return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(DetailView, FormMixin):
     model = Article
+    form_class = CommentCreationForm
+    # CreateView 에는 object 가 없고 DetailView 에는 form 이 없는데 게시글 밑에 댓글 넣는 form 을 두고 싶으면
+    # FormMixin 을 상속받고 form_class 를 지정해주면 된다
     context_object_name = 'target_article'  # html 에 target_article 로 넘겨줌
     template_name = 'articleapp/detail.html'  # html 연결
+    # detailview 에서는 form이 없고 createview 에서는 context 가 없다
+    # But 상세보기 페이지에서 댓글을 달고 싶으면 Form 이 필요하다 => Mixin 기능을 사용해야함
+
+
+
 
 
 @method_decorator(article_ownership_required, 'get')

@@ -1,0 +1,24 @@
+<!-- base html 을 extends 할 필요는 없음 comment 는 article 안에 include 되어서 쓰일 것이므로-->
+{% load bootstrap4 %}
+
+{% block content %}
+    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+        <div class="mb-4">
+            <h4>Comment Create</h4>
+        </div>
+        <form action="{% url 'commentapp:create' %} " method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %} <!-- bootstrap 이 적용된 form 을 사용 -->
+
+            {% if user.is_authenticated %} <!-- 로그인 한 경우 -->
+            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3 ">
+            {% else %} <!-- 로그인 하지 않은 경우 로그인 하는 화면으로 가는 링크를 달아주고, 로그인 하면 다시 원래 있던 곳으로 돌아오도록(next) -->
+            <a href="{% url 'accountapp:login' %}?next={{ request.path }}"
+                class="btn btn-dark rounded-pill col-6 mt-3 ">
+                Login
+            </a>
+            {% endif %}
+            <input type="hidden" name="article_pk" value="{{ article.pk }}">  <!--현재 게시글의 pk를 value 에 넘어서 값을 넘겨줄 것임-->
+        </form>
+    </div>
+{% endblock %}

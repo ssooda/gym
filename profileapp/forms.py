@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 from profileapp.models import Profile
 
-# Model Form : 기존에 있었던 Model(db) 을 Form 형식으로 변환해주는 기능
+# ModelForm : 기존에 있었던 Model(db) 을 Form 형식으로 변환해주는 기능
 
 
 class ProfileCreationForm(ModelForm):

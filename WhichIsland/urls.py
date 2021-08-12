@@ -24,4 +24,6 @@ urlpatterns = [
     path('accounts/', include('accountapp.urls')),  # accountapp 폴더의 urls 라는 파일에서 다시 분기해나감
     path('profiles/', include('profileapp.urls')),   # profileapp 폴더의 urls 라는 파일에서 다시 분기해나감
     path('articles/', include('articleapp.urls')),
+    path('comments/', include('commentapp.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 프로필 사진 화면에 띄우기

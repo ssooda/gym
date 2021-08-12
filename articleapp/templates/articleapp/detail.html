@@ -38,6 +38,12 @@
       </a>
     </div>
     {% endif %}
+    <hr>
+
+    {% include 'commentapp/create.html' with article=target_article %}
+    <!-- include 를 통해서 이 페이지에 commentapp 의 create.html 을 들고 옴-->
+    <!-- include 할 때 with 구문을 통해서 target_article 을 article 에 넣어줌 ->
+    commentapp/create.html 안에서 article 변수 사용 가능 -->
 
   </div>
 </div>
