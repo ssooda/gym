@@ -5,9 +5,11 @@ from django.shortcuts import render
 # ROOT 폴더의 settings는 어떤 앱(라우팅), 라이브러리와 연결되는지
 # 각 기능별 앱에서는 models.py : 데이터베이스, urls.py : 라우팅, view.py : html 과 연결되는 부분
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.utils.decorators import method_decorator
+from django.views.generic import CreateView, DeleteView
 
 from articleapp.models import Article
+from commentapp.decorators import comment_ownership_required
 from commentapp.forms import CommentCreationForm
 from commentapp.models import Comment
 
@@ -28,3 +30,15 @@ class CommentCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})  # object=comment, artilce의 pk
+
+
+@method_decorator(comment_ownership_required, 'get')
+@method_decorator(comment_ownership_required, 'post')
+class CommentDeleteView(DeleteView):
+    model = Comment
+    context_object_name = 'target_comment'
+    template_name = 'commentapp/delete.html'
+
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.article.pk})
+
