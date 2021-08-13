@@ -3,7 +3,9 @@
     <div class="whichisland_header">
 
         <div>
-            <h1 class="whichisland_logo"> Sporters </h1>
+            <a href="{% url 'accountapp:home' %}">
+                <h1 class="whichisland_logo"> Sporters </h1>
+            </a>
         </div>
         <div style="margin: 1rem;">
             <a href="{% url 'articleapp:list' %}" class="whichisland_header_nav">

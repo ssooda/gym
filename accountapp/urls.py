@@ -1,7 +1,9 @@
+
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
-from accountapp.views import hello_world, AccountCreateView, AccountDetailView, AccountUpdateView, AccountDeleteView
+from accountapp.views import hello_world, AccountCreateView, AccountDetailView, AccountUpdateView, AccountDeleteView, \
+    home
 
 app_name = "accountapp"  # accountapp이라는 app_name 을 명시함으로써 app_name:path_name 방식을 활용할 수 있음
 
@@ -18,4 +20,6 @@ urlpatterns = [
     path('update/<int:pk>', AccountUpdateView.as_view(), name='update'),
 
     path('delete/<int:pk>', AccountDeleteView.as_view(), name='delete'),
+
+    path('home/', home, name='home'),
 ]

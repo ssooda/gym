@@ -48,6 +48,8 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
         return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
 
 
+def home(request):
+    return HttpResponseRedirect(reverse('accountapp:home'))
 
 # Class Based View
 

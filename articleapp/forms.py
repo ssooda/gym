@@ -7,6 +7,6 @@ from articleapp.models import Article
 class ArticleCreationForm(ModelForm):  # model 에 있는 정보를 바탕으로 form 을 만들어줌
     class Meta:
         model = Article
-        fields = ['title', 'location', 'content',  'image']  # 이 3 가지를 입력 받을 수 있는 model form 을 만들어줌
+        fields = ['title', 'location', 'content', 'project', 'image']  # 이 3 가지를 입력 받을 수 있는 model form 을 만들어줌
         # writer 은 서버에서
 
