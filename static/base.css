@@ -1,5 +1,5 @@
 .whichisland_logo{
-    font-family: 'Palette Mosaic', cursive;
+    font-family: 'Anton', sans-serif;
 }
 
 .whichisland_header{
@@ -22,8 +22,17 @@ a{
     color: black;
 }
 
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
 @media screen and (max-width:500px) {
     html {
         font-size: 7px;
     }
+}
+
+.whichisland_header_nav {
+    margin: 1rem .5rem;
 }

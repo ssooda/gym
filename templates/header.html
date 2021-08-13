@@ -6,12 +6,18 @@
             <h1 class="whichisland_logo"> Sporters </h1>
         </div>
         <div style="margin: 1rem;">
-            <a href="{% url 'articleapp:list' %}" style="text-decoration:none">
+            <a href="{% url 'articleapp:list' %}" class="whichisland_header_nav">
                 <span>선수소개</span>
             </a> |
-            <span>구단소개</span> |
-            <span>대회정보</span> |
-            <span>장소소개</span>
+            <a href="{% url 'projectapp:list' %}" class="whichisland_header_nav">
+                <span>구단소개</span>
+            </a> |
+            <a href="" class="whichisland_header_nav">
+                <span>대회정보</span>
+            </a> |
+            <a href="" class="whichisland_header_nav">
+                <span>장소소개</span>
+            </a>
         </div>
 
         <div style="text-align: right; margin: 1rem 2rem; font-size:10px;">
