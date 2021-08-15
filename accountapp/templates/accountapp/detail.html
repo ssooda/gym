@@ -67,6 +67,11 @@
     {% endif %}
 
   </div>
+  <div>
+    {% include 'snippets/list_fragment.html' with article_list=object_list %}
+<!--  snippets 폴더 안의 list_fragment 를 사용하는데, 이때 article_list 라는 변수에 object_list 를 넣어서 같이 넘겨줌
+    그럼 list_fragment 에서 article_list 라는 변수를 사용할 수 있고, 이때 변수의 내용에는 object_list 가 들어가있음-->
+  </div>
 </div>
 
 {% endblock %}

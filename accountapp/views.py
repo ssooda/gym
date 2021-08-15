@@ -8,12 +8,15 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic.list import MultipleObjectMixin
 
 from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountUpdateForm
 from accountapp.models import HelloWorld
 
 # method_decorator 은 배열 내에 있는 모든 데코레이터를 확인
+from articleapp.models import Article
+
 has_ownership = [account_ownership_required, login_required]
 
 
@@ -49,7 +52,7 @@ def hello_world(request):  # view 에서 만든 함수를 urls 에서 routing
 
 
 def home(request):
-    return HttpResponseRedirect(reverse('accountapp:home'))
+    return render(request, 'accountapp/home.html')
 
 # Class Based View
 
@@ -63,10 +66,17 @@ class AccountCreateView(CreateView):  # 회원가입
 
 
 
-class AccountDetailView(DetailView):  # 개인 페이지
+class AccountDetailView(DetailView, MultipleObjectMixin):  # 개인 페이지
+    # MultipleObjectMixin 은 project 의 DetailView 에서도 사용됨
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
+
+    paginate_by = 25
+
+    def get_context_data(self, **kwargs):
+        object_list = Article.objects.filter(writer=self.get_object())
+        return super(AccountDetailView, self).get_context_data(object_list=object_list, **kwargs)
 
 
 @method_decorator(has_ownership, 'get')
