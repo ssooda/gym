@@ -40,6 +40,9 @@
             <a href="{% url 'accountapp:detail' pk=user.pk%}" >  <!-- detail 뒤에 받는 정수형 pk는 현재 로그인 되어있는 user 의 pk임 -->
                 <span>선수정보관리</span> |
             </a>
+            <a href="{% url 'subscribeapp:list' %}" >  <!-- detail 뒤에 받는 정수형 pk는 현재 로그인 되어있는 user 의 pk임 -->
+                <span>구독</span> |
+            </a>
             <a href="{% url 'accountapp:logout' %}?next={{ request.path }}" >
                 <span>로그아웃</span>
             </a>

@@ -34,7 +34,11 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
 
         if user.is_authenticated:  # 유저가 로그인 되어있으면
             subscription = Subscription.objects.filter(user=user, project=project)  # 구독정보가 있는지 없는지 확인
-
+            # filter(user=user, project=proejct) 이렇게 쓰는 것은 and function : user & project 값을 넘겨주는 것
+            # 그렇다면 or, where 은 어떻게 쓰는 것일까?
+            # Articles.objects.filter(project__in=projects) => 장고에서 말하는 Field Lookups(double underscore) =>
+            # 이건 sql(db) 안에서 select where project in()이런 식으로 쓰임 목적은 복잡한 db 쿼리르 구현할 수 있도록 만들어 줌
+            # sql+장고를 사용할 때 field lookup을 활용하면 복잡한 쿼리를 실행할 수 있다
 
         object_list = Article.objects.filter(project=self.get_object())
         return super(ProjectDetailView, self).get_context_data(object_list=object_list, subscription=subscription, **kwargs)
