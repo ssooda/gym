@@ -4,15 +4,33 @@
 {%  block content %}
 
 <div>
+    <div style="text-align:right;">
+    {% if user.is_authenticated %}
+        {% if not subscription %}
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }} "
+          class="btn btn-primary rounded-pill px-3">  <!--url 로 연결하는게 get 방식으로 요청하는 건데 ?뒤에 보내줄 변수를 알려줌-->
+          Subscribe
+        </a>
+        {% else %}
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }} "
+          class="btn btn-dark rounded-pill px-3">  <!--url 로 연결하는게 get 방식으로 요청하는 건데 ?뒤에 보내줄 변수를 알려줌-->
+          Unsubscribe
+        </a>
+        {% endif %}
+    {% endif %}
+
+  </div>
+
   <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-
-    <img style="width: 100%; border-radius: 1rem" src="{{ target_project.image.url }}" alt=""
-        style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;">
-
 
     <h2>
       {{ target_project.title }}
     </h2>
+
+    <hr>
+
+    <img style="width: 100%; border-radius: 1rem" src="{{ target_project.image.url }}" alt=""
+        style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem; object-fit: cover;">
 
     <hr>
 
@@ -24,7 +42,7 @@
   </div>
 
   <div>
-
+    <h3 class="text-center"> 선수소개 </h3>
       {% include 'snippets/list_fragment.html' with article_list=object_list %}
 
   </div>
