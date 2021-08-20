@@ -38,7 +38,7 @@ class ProfileUpdateView(UpdateView):
     context_object_name = 'target_profile'
     # 현재 보고 있는 사용자의 profile 은 Profile 이라는 db 에 저장되어있고, 이 사람은 탬플릿에서 target_profile 로 지칭함
     form_class = ProfileCreationForm
-    # success_url = reverse_lazy('accountapp:hello_world')
+    success_url = reverse_lazy('accountapp:home')
     template_name = 'profileapp/update.html'
 
     def get_success_url(self):

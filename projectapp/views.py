@@ -39,6 +39,8 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
             # Articles.objects.filter(project__in=projects) => 장고에서 말하는 Field Lookups(double underscore) =>
             # 이건 sql(db) 안에서 select where project in()이런 식으로 쓰임 목적은 복잡한 db 쿼리르 구현할 수 있도록 만들어 줌
             # sql+장고를 사용할 때 field lookup을 활용하면 복잡한 쿼리를 실행할 수 있다
+        else:
+            subscription = None
 
         object_list = Article.objects.filter(project=self.get_object())
         return super(ProjectDetailView, self).get_context_data(object_list=object_list, subscription=subscription, **kwargs)

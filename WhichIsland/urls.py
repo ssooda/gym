@@ -19,7 +19,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from accountapp.views import home
+
 urlpatterns = [
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('accountapp.urls')),  # accountapp 폴더의 urls 라는 파일에서 다시 분기해나감
     path('profiles/', include('profileapp.urls')),   # profileapp 폴더의 urls 라는 파일에서 다시 분기해나감

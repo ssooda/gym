@@ -12,6 +12,13 @@
 
     <h2>
       {{ target_user.profile.nickname }}
+
+      {% if target_user == user %} <!-- target_user 은 지금 보고있는 페이지 유저, user 은 현재 로그인 되어있는 유저  -->
+      <a class="material-icons" href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+          edit
+      </a>
+      {% endif %}
+
     </h2>
 
 
@@ -29,12 +36,6 @@
     <p>
       {{ target_user.profile.island }}
     </p>
-
-     {% if target_user == user %} <!-- target_user 은 지금 보고있는 페이지 유저, user 은 현재 로그인 되어있는 유저  -->
-      <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-          edit |
-      </a>
-      {% endif %}
 
     {% else %}
 
@@ -56,12 +57,12 @@
 
     {% if target_user == user %}
     <!--    현재 페이지의 user(target_user)가 현재 로그인 되어있는 유저(user)와 같다면-->
-    <a href="{% url 'accountapp:update' pk=user.pk %}">
-        Change Info |
+    <a class="material-icons" href="{% url 'accountapp:update' pk=user.pk %}">
+        settings
     </a>
 
-    <a href="{% url 'accountapp:delete' pk=user.pk %}">
-        Quit |
+    <a class="material-icons" href="{% url 'accountapp:delete' pk=user.pk %}">
+        cancel
     </a>
 
     {% endif %}

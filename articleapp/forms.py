@@ -9,7 +9,7 @@ from projectapp.models import Project
 class ArticleCreationForm(ModelForm):  # model 에 있는 정보를 바탕으로 form 을 만들어줌
     content = forms.CharField(widget=forms.Textarea(attrs={'class': 'editable', 'style': "height:auto; text-align: left;"}))
 
-    project = forms.ModelChoiceField(queryset=Project.objecdts.all(), required=False)
+    project = forms.ModelChoiceField(queryset=Project.objects.all(), required=False)
 
     class Meta:
         model = Article

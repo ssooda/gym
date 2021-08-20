@@ -9,3 +9,7 @@ class Project(models.Model):
     description = models.CharField(max_length=200, null=False)
 
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):  # 파이썬 내부 함수
+        return f'{self.pk} : {self.title}'
+
