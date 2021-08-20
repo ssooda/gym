@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
+
+
+
+
 {% block content %}
+{% load socialaccount %}
+
 
   <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
 
@@ -18,6 +24,10 @@
       </form>
 
     </div>
+    <hr>
+    <a href="{% provider_login_url 'kakao' %}" class="btn" id="kakao_login">
+      카카오톡 회원가입
+    </a>
   </div>
 
 {% endblock %}

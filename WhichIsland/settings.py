@@ -43,6 +43,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 # Application definition
 
 # 앱을 생성하고(python manage.py startapp ), 라이브러리 추가할 때 마다 여기에 적어야 함
@@ -53,14 +58,37 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 부트스트랩
     'bootstrap4',
+
+    # 회원가입
     'accountapp',
+
+    # 프로필
     'profileapp',
+
+    # 게시글
     'articleapp',
+
+    # 댓글
     'commentapp',
+
+    # 프로젝트
     'projectapp',
+
+    # 구독
     'subscribeapp',
+
+    # 카카오톡 소셜 로그인
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.kakao',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -156,8 +184,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = reverse_lazy('accountapp:home')
-LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+LOGIN_REDIRECT_URL = 'accounts/home'
+ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+ACCOUNT_LOGOUT_ON_GET = True
 
 
 # http://127.0.0.1:8000/media/---

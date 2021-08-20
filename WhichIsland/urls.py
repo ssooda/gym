@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from accountapp.views import home
 
@@ -30,5 +30,7 @@ urlpatterns = [
     path('comments/', include('commentapp.urls')),
     path('projects/', include('projectapp.urls')),
     path('subscribe/', include('subscribeapp.urls')),
+    re_path(r'^accounts/', include('accountapp.urls')),
+    re_path(r'^accounts/', include('allauth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # 프로필 사진 화면에 띄우기
