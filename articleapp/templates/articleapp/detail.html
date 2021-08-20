@@ -15,17 +15,12 @@
 
     <hr>
 
-    <h5>
-    {{ target_article.location }}
-    </h5>
-
-
     <img style="width: 100%; border-radius: 1rem" src="{{ target_article.image.url }}" alt="">
 
 
-    <p>
-      {{ target_article.content }}
-    </p>
+    <div style="text-align: left;">
+      {{ target_article.content | safe }}
+    </div>
 
     {% if target_article.writer == user %}
     <div style="text-align: right;">
